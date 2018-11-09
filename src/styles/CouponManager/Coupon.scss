@@ -1,0 +1,92 @@
+.container{
+	margin-bottom: 21px;
+}
+.Coupon{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 42px;
+	background: #F6F6F6;
+	border: 1px solid #CBD3D4;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.CouponOpen{
+	border-radius: 5px 5px 0 0;
+	animation: border-radius .3s ease-out;
+}
+.checkbox{
+	padding: 0 0 0 20px;
+}
+.name,
+.discount,
+.date,
+.status{
+	flex: 1;
+	text-align: center;
+}
+.radioLabel{
+	position: static;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.radioLabel{
+	margin: 0 !important;
+	padding: 0!important;
+}
+.radioLabel::before{
+	position: static!important;
+	text-align: left!important;
+	margin: 0!important;
+}
+.date{
+	font-size: .8em;
+}
+.disabled{
+	color: gray;
+}
+.toggler{
+	width: 44px;
+	height: 44px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #189DEE;
+	color: #fff;
+	font-size: .8em;
+	cursor: pointer;
+	border-radius: 0 5px 5px 0;
+}
+.togglerOpen{
+	border-radius: 0 5px 0 0;
+	animation: border-radius .3s ease-out;
+}
+.active{
+	color: green;
+}
+.paused{
+	color: #a18410;
+}
+.footer{
+	border: 1px solid #CBD3D4;
+	border-top: 0;
+	border-radius: 0 0 5px 5px;
+	display: none;
+	opacity: 0;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.footerOpen{
+	display: flex;
+	animation: appearance .3s ease-out forwards;
+}
+@keyframes appearance {
+	from{
+		opacity: 0;
+		transform: translateY(-20%);
+	}
+	to{
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
