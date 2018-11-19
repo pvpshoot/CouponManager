@@ -1,4 +1,6 @@
 import * as types from "../actions/action-types";
+import * as R from 'ramda';
+
 const initialState = {
   selectedCoupon: "",
   coupons: [],
@@ -19,10 +21,11 @@ const couponReducer = function(state = initialState, action) {
     case types.GET_INIT_COUPONS_FROM_BASE:
       return { ...state, isCouponsLoading: true };
     case types.GET_COUPONS_FROM_BASE:
+      const uniqCoupons = R.uniq([...state.coupons, ...action.payload.items]);
       return {
         ...state,
-        coupons: [...state.coupons, ...action.payload.items],
-        isCouponsLoaded: action.payload.total === state.coupons.length,
+        coupons: uniqCoupons,
+        isCouponsLoaded: action.payload.total === uniqCoupons.length,
         isCouponsLoading: false
       };
 
