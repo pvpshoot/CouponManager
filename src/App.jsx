@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import s from "./styles/CouponManager/CouponManager.scss";
 import { bindMethods } from "./service";
 import Aside from "./aside.jsx";
@@ -7,6 +7,7 @@ import CopyModal from "./copyModal.jsx";
 import { getSoreLang, getCurency } from "./actions/coupon-actions.js";
 import { connect } from "react-redux";
 import { Layout } from "antd";
+import Print from "./print";
 
 import "./App.sass";
 
@@ -37,9 +38,13 @@ class App extends React.Component {
     let useLang = isActiveLangRussian ? "ru" : "en";
     return lang[useLang][item];
   }
-  render() {
+  renderContent() {
+    const { print } = this.props;
+    if (print) {
+      return <Print />;
+    }
     return (
-      <Layout style={{ minHeight: "100vh" }}>
+      <Fragment>
         <Content className="container">
           <h1>{this.getTranslate("title")}</h1>
           <div style={{ background: "#fff", padding: 24, minHeight: 380 }}>
@@ -50,14 +55,20 @@ class App extends React.Component {
           <Aside />
           <CopyModal />
         </Sider>
-      </Layout>
+      </Fragment>
+    );
+  }
+  render() {
+    return (
+      <Layout style={{ minHeight: "100vh" }}>{this.renderContent()}</Layout>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    storeLang: state.couponReducer.storeLang
+    storeLang: state.couponReducer.storeLang,
+    print: state.couponReducer.print
   };
 }
 export default connect(

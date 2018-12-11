@@ -84,3 +84,15 @@ export function setAppReady() {
     payload: true
   };
 }
+
+export function showPrint() {
+  return {
+    type: types.SHOW_PRINT
+  };
+}
+
+export function hidePrint() {
+  return {
+    type: types.HIDE_PRINT
+  };
+}

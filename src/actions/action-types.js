@@ -9,3 +9,6 @@ export const CLOSE_COPY_MODAL = "CLOSE_COPY_MODAL";
 
 export const GET_STORE_LANG = "GET_STORE_LANG";
 export const GET_CURRENCY = "GET_CURRENCY";
+
+export const SHOW_PRINT = "SHOW_PRINT";
+export const HIDE_PRINT = "HIDE_PRINT";

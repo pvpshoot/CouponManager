@@ -8,6 +8,7 @@ import { openCopyModal } from "./actions/coupon-actions.js";
 import s from "./styles/CouponManager/Aside.scss";
 import { Button } from "antd";
 import * as R from "ramda";
+import { showPrint } from "./actions/coupon-actions";
 
 class Aside extends React.Component {
   constructor(props) {
@@ -106,7 +107,7 @@ class Aside extends React.Component {
           <br />
           <div>
             <Button
-              onClick={this.printCoupons}
+              onClick={this.props.showPrint}
               disabled={R.isEmpty(this.props.selectedCoupon)}
             >
               {this.getTranslate("print")}
@@ -136,5 +137,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { openCopyModal }
+  { openCopyModal, showPrint }
 )(Aside);

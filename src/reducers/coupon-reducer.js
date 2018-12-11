@@ -6,6 +6,7 @@ const initialState = {
   coupons: [],
   isCouponsLoaded: true,
   isCouponsLoading: false,
+  print: false,
   aplication: {
     ready: false
   },
@@ -52,6 +53,10 @@ const couponReducer = function(state = initialState, action) {
       return { ...state, selectedCoupon: action.payload };
     case types.GET_STORE_LANG:
       return { ...state, storeLang: action.payload };
+    case types.SHOW_PRINT:
+      return { ...state, print: true };
+    case types.HIDE_PRINT:
+      return { ...state, print: false };
 
     default:
       return state;
