@@ -8,6 +8,8 @@ import { getSoreLang, getCurency } from "./actions/coupon-actions.js";
 import { connect } from "react-redux";
 import { Layout } from "antd";
 
+import "./App.sass";
+
 const { Header, Footer, Sider, Content } = Layout;
 
 class App extends React.Component {
@@ -38,7 +40,7 @@ class App extends React.Component {
   render() {
     return (
       <Layout style={{ minHeight: "100vh" }}>
-        <Content style={{ padding: "0 50px", marginTop: 64 }}>
+        <Content className="container">
           <h1>{this.getTranslate("title")}</h1>
           <div style={{ background: "#fff", padding: 24, minHeight: 380 }}>
             <Main />

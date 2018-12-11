@@ -1,4 +1,4 @@
-import SearchInput, { createFilter } from "react-search-input";
+import { createFilter } from "react-search-input";
 import {
   getCouponsFromBase,
   setAppReady,
@@ -9,39 +9,14 @@ import React from "react";
 import _ from "lodash";
 import { bindMethods } from "./service";
 import { connect } from "react-redux";
-import { Table, Tag, Input } from "antd";
+import { Table, Tag, Input, Button, Progress } from "antd";
 import * as R from "ramda";
 import moment from "moment";
 import s from "./styles/CouponManager/Main.scss";
+import CopyButton from "./CopyButton";
 
 const KEYS_TO_FILTERS = ["name", "status", "code"];
 const Search = Input.Search;
-
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name"
-  },
-  {
-    title: "Discount Type",
-    dataIndex: "discountType"
-  },
-  {
-    title: "Time",
-    dataIndex: "id",
-    render(text, record, index) {
-      if (!record.expirationDate) return "until deactivated";
-      return moment(record.expirationDate).format("MMM D YYYY");
-    }
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    render(_, { status }) {
-      return <span className={mapCouponStatus(status)}>{status}</span>;
-    }
-  }
-];
 
 function mapCouponStatus(status) {
   switch (status) {
@@ -59,6 +34,38 @@ function mapCouponStatus(status) {
 }
 
 class Main extends React.Component {
+  columns = [
+    {
+      title: "Name",
+      dataIndex: "name"
+    },
+    {
+      title: "Discount Type",
+      dataIndex: "discountType"
+    },
+    {
+      title: "Time",
+      dataIndex: "id",
+      render(text, record, index) {
+        if (!record.expirationDate) return "until deactivated";
+        return moment(record.expirationDate).format("MMM D YYYY");
+      }
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render(_, { status }) {
+        return <span className={mapCouponStatus(status)}>{status}</span>;
+      }
+    },
+    {
+      title: "Action",
+      render: (_, row) => {
+        return <CopyButton coupon={row} />;
+      }
+    }
+  ];
+
   constructor(props) {
     super(props);
     this.state = {
@@ -71,12 +78,18 @@ class Main extends React.Component {
       "searchUpdated",
       "getSearchPlaceholder"
     ]);
+
+    // this.throttle("resize", "optimizedResize");
   }
   componentDidMount() {
     this.props.getCouponsFromBase();
     if (!this.props.aplication.ready) {
       this.props.setAppReady();
     }
+    // const update = this.forceUpdate;
+    // window.addEventListener("optimizedResize", () => {
+    //   update();
+    // });
   }
   componentWillReceiveProps(props) {
     if (!props.isCouponsLoaded) {
@@ -85,6 +98,21 @@ class Main extends React.Component {
     if (props.isCouponsLoaded) {
     }
   }
+  throttle = (type, name, obj) => {
+    obj = obj || window;
+    var running = false;
+    var func = function() {
+      if (running) {
+        return;
+      }
+      running = true;
+      requestAnimationFrame(function() {
+        obj.dispatchEvent(new CustomEvent(name));
+        running = false;
+      });
+    };
+    obj.addEventListener(type, func);
+  };
   mekeCouponsGroups(data) {
     const sortByDate = (a, b) => {
       const d1 = new Date(a.updateDate);
@@ -100,7 +128,7 @@ class Main extends React.Component {
     });
     return couponGroupObj;
   }
-  makeCoupons(couponsArray) {
+  makeCoupons = couponsArray => {
     if (_.isObject(couponsArray)) {
       const { search } = this.state;
 
@@ -137,9 +165,12 @@ class Main extends React.Component {
       return (
         <Table
           rowSelection={rowSelection}
-          rowKey={r => r.name}
+          rowKey={r => {
+            return r.name;
+          }}
+          scroll={{ x: true }}
           loading={!this.props.isCouponsLoaded}
-          columns={columns}
+          columns={this.columns}
           dataSource={couponsForTable(couponsArray)}
           size="small"
           expandedRowRender={record =>
@@ -160,13 +191,18 @@ class Main extends React.Component {
         />
       );
     }
-  }
+  };
   searchUpdated(term) {
     this.setState({ searchTerm: term });
   }
   getSearchPlaceholder() {
     return this.props.storeLang === "ru" ? "Поиск" : "Search";
   }
+
+  renderProgress = () => {
+    const { isCouponsLoaded, total, coupons } = this.props;
+    return <Progress percent={Math.floor((coupons.length * 100) / total)} />;
+  };
   render() {
     const filteredCoupons = this.props.coupons.filter(
       createFilter(this.state.searchTerm, KEYS_TO_FILTERS)
@@ -180,6 +216,7 @@ class Main extends React.Component {
           style={{ width: 300 }}
         />
         <br />
+        {this.renderProgress()}
         <br />
         {this.makeCoupons(filteredCoupons)}
       </div>
@@ -192,7 +229,8 @@ function mapStateToProps(state) {
     aplication: state.couponReducer.aplication,
     selectedCoupon: state.couponReducer.selectedCoupon,
     isCouponsLoaded: state.couponReducer.isCouponsLoaded,
-    storeLang: state.couponReducer.storeLang
+    storeLang: state.couponReducer.storeLang,
+    total: state.couponReducer.total
   };
 }
 export default connect(

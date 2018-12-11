@@ -39,6 +39,7 @@ export function exportToCsv(filename, rows) {
     if (link.download !== undefined) {
       // feature detection
       // Browsers that support HTML5 download attribute
+      debugger; //eslint-disable-line
       var url = URL.createObjectURL(blob);
       link.setAttribute("href", url);
       link.setAttribute("download", filename);

@@ -10,7 +10,7 @@ import s from "./styles/CouponManager/Popup.scss";
 import Chance from "chance";
 import axios from "axios";
 import { storeId, accessToken } from "./ecwidConfig";
-import { Modal, Input, Form, Button, Checkbox } from "antd";
+import { Modal, Input, Form, Button, Checkbox, notification } from "antd";
 import * as R from "ramda";
 const chance = new Chance();
 
@@ -86,8 +86,19 @@ class CopyModal extends React.Component {
         )
       );
     }
+    notification.info({
+      message: `Copying ${promises.length} coupons`,
+      duration: 0
+    });
+
     axios
       .all(promises)
+      .then(() => {
+        notification.success({
+          message: `Finished copying coupons!`
+        });
+        setTimeout(() => document.location.reload(), 1000);
+      })
       .then(result => {
         this.props.getCouponsFromBase();
       })

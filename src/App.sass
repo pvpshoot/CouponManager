@@ -1,0 +1,22 @@
+=md
+  @media (min-width: 720px)
+    @content
+
+.container 
+  padding-top: 20px
+  margin-top: 20px
+  +md
+    padding: 0 50px
+    margin-top: 64px
+
+.ant-layout-sider-light
+  display: none
+  +md
+    display: block
+.ant-table 
+  .ant-table-expanded-row
+    td
+      white-space: initial 
+  td 
+    white-space: nowrap 
+

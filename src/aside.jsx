@@ -3,7 +3,7 @@ import { bindMethods, exportToCsv, openDataPage } from "./service";
 import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import json2csv from "json2csv";
+import { Parser } from "json2csv";
 import { openCopyModal } from "./actions/coupon-actions.js";
 import s from "./styles/CouponManager/Aside.scss";
 import { Button } from "antd";
@@ -46,7 +46,8 @@ class Aside extends React.Component {
       }
     }
     try {
-      let result = json2csv({ data, fields });
+      const json2csvParser = new Parser({ fields });
+      let result = json2csvParser.parse(data);
       const filename = "coupons.csv";
       if (!result.match(/^data:text\/csv/i)) {
         result = "data:text/csv;charset=utf-8," + result;
@@ -57,7 +58,7 @@ class Aside extends React.Component {
       link.setAttribute("download", filename);
       link.click();
     } catch (err) {
-      debugger;
+      console.error(err);
     }
   };
   getActiveSetCoupons() {

@@ -1,5 +1,5 @@
 import * as types from "../actions/action-types";
-import * as R from 'ramda';
+import * as R from "ramda";
 
 const initialState = {
   selectedCoupon: "",
@@ -21,12 +21,22 @@ const couponReducer = function(state = initialState, action) {
     case types.GET_INIT_COUPONS_FROM_BASE:
       return { ...state, isCouponsLoading: true };
     case types.GET_COUPONS_FROM_BASE:
-      const uniqCoupons = R.uniq([...state.coupons, ...action.payload.items]);
+      const uniqCoupons = R.uniqWith(
+        (a, b) => {
+          return a.name === b.name && a.id === b.id;
+        },
+        [...state.coupons, ...action.payload.items]
+      );
+      // debugger; //eslint-disable-line
       return {
         ...state,
         coupons: uniqCoupons,
-        isCouponsLoaded: action.payload.total === uniqCoupons.length,
-        isCouponsLoading: false
+        isCouponsLoaded:
+          action.payload.total ===
+            [...state.coupons, ...action.payload.items].length ||
+          action.payload.count === 0,
+        isCouponsLoading: false,
+        total: action.payload.total
       };
 
     case types.OPEN_COPY_MODAL:
