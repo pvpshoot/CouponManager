@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import s from "./styles/CouponManager/CouponManager.scss";
 import { bindMethods } from "./service";
+import * as R from "ramda";
 import Aside from "./aside.jsx";
 import Main from "./main.jsx";
 import CopyModal from "./copyModal.jsx";
@@ -10,6 +11,7 @@ import { Layout } from "antd";
 import Print from "./print";
 
 import "./App.sass";
+import { Trans, withNamespaces } from "react-i18next";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -19,25 +21,12 @@ class App extends React.Component {
     this.state = {
       data: ""
     };
-    bindMethods(this, ["getTranslate"]);
   }
   componentDidMount() {
     this.props.getSoreLang();
     this.props.getCurency();
   }
-  getTranslate(item) {
-    const lang = {
-      en: {
-        title: "Coupon Manager"
-      },
-      ru: {
-        title: "Менеджер Купонов"
-      }
-    };
-    let isActiveLangRussian = this.props.storeLang === "ru";
-    let useLang = isActiveLangRussian ? "ru" : "en";
-    return lang[useLang][item];
-  }
+
   renderContent() {
     const { print } = this.props;
     if (print) {
@@ -46,7 +35,9 @@ class App extends React.Component {
     return (
       <Fragment>
         <Content className="container">
-          <h1>{this.getTranslate("title")}</h1>
+          <h1>
+            <Trans i18nKey="title" />
+          </h1>
           <div style={{ background: "#fff", padding: 24, minHeight: 380 }}>
             <Main />
           </div>
@@ -71,7 +62,13 @@ function mapStateToProps(state) {
     print: state.couponReducer.print
   };
 }
-export default connect(
-  mapStateToProps,
-  { getSoreLang, getCurency }
-)(App);
+
+const enhancedComponent = R.pipe(
+  connect(
+    mapStateToProps,
+    { getSoreLang, getCurency }
+  ),
+  withNamespaces("translation")
+);
+
+export default enhancedComponent(App);

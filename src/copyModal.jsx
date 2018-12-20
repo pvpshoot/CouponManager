@@ -12,6 +12,7 @@ import axios from "axios";
 import { storeId, accessToken } from "./ecwidConfig";
 import { Modal, Input, Form, Button, Checkbox, notification } from "antd";
 import * as R from "ramda";
+import { Trans } from "react-i18next";
 const chance = new Chance();
 
 class CopyModal extends React.Component {
@@ -32,8 +33,7 @@ class CopyModal extends React.Component {
       "handleChangeprefix",
       "handleChangeRandom",
       "submitGenerator",
-      "getRandomCode",
-      "getTranslate"
+      "getRandomCode"
     ]);
   }
   componentDidMount() {}
@@ -105,32 +105,11 @@ class CopyModal extends React.Component {
       .then(this.closeModal())
       .catch(error => console.error(error));
   }
-  getTranslate(item) {
-    const lang = {
-      en: {
-        title: "Choose the coupon code prefix and the number of codes",
-        random: "Random code:",
-        prefix: "Prefix:",
-        amount: "Amount:",
-        button: "Generate coupons"
-      },
-      ru: {
-        title: "Выберите префикс для кода и их количество",
-        random: "Случайный код:",
-        prefix: "Префикс:",
-        amount: "Количество:",
-        button: "Сгенерировать"
-      }
-    };
-    let isActiveLangRussian = this.props.storeLang === "ru";
-    let useLang = isActiveLangRussian ? "ru" : "en";
-    return lang[useLang][item];
-  }
   render() {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 4 }
+        sm: { span: 6 }
       },
       wrapperCol: {
         xs: { span: 24 },
@@ -145,9 +124,11 @@ class CopyModal extends React.Component {
       >
         <div className={`${s.mainPopup} ${s.mainPopup_center}`}>
           <div className={s.mainPopup__container}>
-            <h3 className={s.mainPopup__title}>{this.getTranslate("title")}</h3>
+            <h3 className={s.mainPopup__title}>
+              <Trans i18nKey="copy_modal.title" />
+            </h3>
             <Form.Item
-              label={this.getTranslate("random") + " "}
+              label={<Trans i18nKey="copy_modal.random" />}
               {...formItemLayout}
             >
               <Checkbox
@@ -157,7 +138,7 @@ class CopyModal extends React.Component {
             </Form.Item>
             {!this.state.copyConfig.random ? (
               <Form.Item
-                label={this.getTranslate("prefix")}
+                label={<Trans i18nKey="copy_modal.prefix" />}
                 {...formItemLayout}
               >
                 <Input
@@ -173,7 +154,10 @@ class CopyModal extends React.Component {
               ""
             )}
 
-            <Form.Item label={this.getTranslate("amount")} {...formItemLayout}>
+            <Form.Item
+              label={<Trans i18nKey="copy_modal.amount" />}
+              {...formItemLayout}
+            >
               <Input
                 type="number"
                 className="form-control input-medium"
@@ -189,7 +173,7 @@ class CopyModal extends React.Component {
                 onClick={this.submitGenerator}
                 disabled={R.isEmpty(this.props.selectedCoupon)}
               >
-                {this.getTranslate("button")}
+                <Trans i18nKey="copy_modal.button" />
               </Button>
             </div>
           </div>

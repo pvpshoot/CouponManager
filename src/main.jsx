@@ -14,6 +14,7 @@ import * as R from "ramda";
 import moment from "moment";
 import s from "./styles/CouponManager/Main.scss";
 import CopyButton from "./CopyButton";
+import { Trans, withNamespaces } from "react-i18next";
 
 const KEYS_TO_FILTERS = ["name", "status", "code"];
 const Search = Input.Search;
@@ -36,15 +37,15 @@ function mapCouponStatus(status) {
 class Main extends React.Component {
   columns = [
     {
-      title: "Name",
+      title: <Trans i18nKey="main.name" />,
       dataIndex: "name"
     },
     {
-      title: "Discount Type",
+      title: <Trans i18nKey="main.discount_type" />,
       dataIndex: "discountType"
     },
     {
-      title: "Time",
+      title: <Trans i18nKey="main.time" />,
       dataIndex: "id",
       render(text, record, index) {
         if (!record.expirationDate) return "until deactivated";
@@ -52,16 +53,20 @@ class Main extends React.Component {
       }
     },
     {
-      title: "Status",
+      title: <Trans i18nKey="main.status" />,
       dataIndex: "status",
       render(_, { status }) {
         return <span className={mapCouponStatus(status)}>{status}</span>;
       }
     },
     {
-      title: "Action",
+      title: <Trans i18nKey="main.action" />,
       render: (_, row) => {
-        return <CopyButton coupon={row} />;
+        return (
+          <CopyButton coupon={row}>
+            <Trans i18nKey="main.copy" />
+          </CopyButton>
+        );
       }
     }
   ];
@@ -75,8 +80,7 @@ class Main extends React.Component {
       "makeCoupons",
       "mekeCouponsGroups",
       "componentDidMount",
-      "searchUpdated",
-      "getSearchPlaceholder"
+      "searchUpdated"
     ]);
 
     // this.throttle("resize", "optimizedResize");
@@ -195,22 +199,20 @@ class Main extends React.Component {
   searchUpdated(term) {
     this.setState({ searchTerm: term });
   }
-  getSearchPlaceholder() {
-    return this.props.storeLang === "ru" ? "Поиск" : "Search";
-  }
 
   renderProgress = () => {
     const { isCouponsLoaded, total, coupons } = this.props;
     return <Progress percent={Math.floor((coupons.length * 100) / total)} />;
   };
   render() {
+    const { t } = this.props;
     const filteredCoupons = this.props.coupons.filter(
       createFilter(this.state.searchTerm, KEYS_TO_FILTERS)
     );
     return (
       <div>
         <Search
-          placeholder={this.getSearchPlaceholder()}
+          placeholder={t("main.search")}
           onSearch={search => this.setState({ search })}
           onChange={e => this.setState({ search: e.target.value })}
           style={{ width: 300 }}
@@ -233,7 +235,12 @@ function mapStateToProps(state) {
     total: state.couponReducer.total
   };
 }
-export default connect(
-  mapStateToProps,
-  { getCouponsFromBase, setAppReady, setActiveCoupon }
-)(Main);
+
+const enhancedComponent = R.pipe(
+  connect(
+    mapStateToProps,
+    { getCouponsFromBase, setAppReady, setActiveCoupon }
+  ),
+  withNamespaces("translation")
+);
+export default enhancedComponent(Main);

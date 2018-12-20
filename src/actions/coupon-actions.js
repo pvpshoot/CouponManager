@@ -1,6 +1,7 @@
 import * as types from "../actions/action-types";
 import axios from "axios";
 import { storeId, accessToken } from "../ecwidConfig";
+import i18n from "i18next";
 const devHash =
   "#7b2273746f72655f6964223a353533363031372c226163636573735f746f6b656e223a223446317a644c74486a716231616569616262726b786a5458396b444e42547242222c226c616e67223a227275227d";
 
@@ -26,6 +27,7 @@ export function getCouponsFromBase(offset = 0) {
 
 export function getSoreLang() {
   const response = EcwidApp.getPayload();
+  i18n.changeLanguage(response.lang);
   return {
     type: types.GET_STORE_LANG,
     payload: response.lang

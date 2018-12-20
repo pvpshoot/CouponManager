@@ -1,0 +1,26 @@
+{
+  "title": "Coupon Manager",
+  "aside": {
+    "title": "Please select coupon you want to manage",
+    "old_design": "Old design",
+    "print": "Print coupon",
+    "copy": "Copy coupon",
+    "download_сsv": "Download CSV"
+  },
+  "copy_modal": {
+    "title": "Choose the coupon code prefix and the number of codes",
+    "random": "Random code: ",
+    "prefix": "Prefix: ",
+    "amount": "Amount: ",
+    "button": "Generate coupons"
+  },
+  "main": {
+    "name": "Name",
+    "discount_type": "Discount Type",
+    "time": "Time",
+    "status": "Status",
+    "action": "Action",
+    "search": "Search",
+    "copy": "Copy"
+  }
+}

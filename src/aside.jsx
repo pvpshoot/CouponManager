@@ -9,6 +9,7 @@ import s from "./styles/CouponManager/Aside.scss";
 import { Button } from "antd";
 import * as R from "ramda";
 import { showPrint } from "./actions/coupon-actions";
+import { Trans } from "react-i18next";
 
 class Aside extends React.Component {
   constructor(props) {
@@ -92,16 +93,19 @@ class Aside extends React.Component {
     return lang[useLang][item];
   }
   render() {
+    const hash = window.location.hash;
     return (
       <aside className={s.Aside} style={{ paddingTop: 100 }}>
         <div style={{ padding: 10, background: "#fff" }}>
-          <h2>{this.getTranslate("title")}</h2>
+          <h2>
+            <Trans i18nKey="aside.title" />
+          </h2>
           <div>
             <Button
               onClick={this.openModal}
               disabled={R.isEmpty(this.props.selectedCoupon)}
             >
-              {this.getTranslate("copy")}
+              <Trans i18nKey="aside.copy" />
             </Button>
           </div>
           <br />
@@ -110,7 +114,7 @@ class Aside extends React.Component {
               onClick={this.props.showPrint}
               disabled={R.isEmpty(this.props.selectedCoupon)}
             >
-              {this.getTranslate("print")}
+              <Trans i18nKey="aside.print" />
             </Button>
           </div>
           <br />
@@ -119,7 +123,16 @@ class Aside extends React.Component {
               onClick={this.downloadCsv}
               disabled={R.isEmpty(this.props.selectedCoupon)}
             >
-              {this.getTranslate("downloadCsv")}
+              <Trans i18nKey="aside.download_сsv" />
+            </Button>
+          </div>
+          <br />
+          <div>
+            <Button
+              type="primary"
+              href={`https://pvpshoot.github.io/couponManager__Build/couponManager/app.html?${hash}`}
+            >
+              <Trans i18nKey="aside.old_design" />
             </Button>
           </div>
         </div>

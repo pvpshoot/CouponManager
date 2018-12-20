@@ -5,6 +5,23 @@ import store from "./store";
 import App from "./App.jsx";
 import "./ecwidConfig";
 import * as serviceWorker from "./serviceWorker";
+import i18n from "i18next";
+import { withI18n, reactI18nextModule } from "react-i18next";
+import Backend from "i18next-xhr-backend";
+
+i18n
+  .use(Backend)
+  .use(reactI18nextModule)
+  .init({
+    fallbackLng: "en",
+    debug: true,
+    interpolation: {
+      escapeValue: false // not needed for react as it escapes by default
+    },
+    react: {
+      wait: true
+    }
+  });
 
 class CouponManager extends React.Component {
   constructor(props) {
