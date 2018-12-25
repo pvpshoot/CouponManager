@@ -177,12 +177,20 @@ class Main extends React.Component {
           columns={this.columns}
           dataSource={couponsForTable(couponsArray)}
           size="small"
-          expandedRowRender={record =>
-            record.data.map(el => (
-              <Tag color="blue" key={el.code}>
-                {el.code}
-              </Tag>
-            ))
+          expandedRowRender={
+            record => (
+              <ul style={{ columnCount: 4 }}>
+                {record.data.map(el => (
+                  <li key={el.code}>{el.code}</li>
+                ))}
+              </ul>
+            )
+            // record.data.map(
+            // el =>
+            // el.code
+            // <Tag color="blue" key={el.code}>
+            //   {el.code}
+            // </Tag>
           }
           pagination={{
             defaultPageSize: 30
