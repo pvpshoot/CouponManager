@@ -9,12 +9,25 @@ import i18n from "i18next";
 import { withI18n, reactI18nextModule } from "react-i18next";
 import Backend from "i18next-xhr-backend";
 
+console.log(
+  `%c info %c ${window.location.pathname.replace(
+    "/",
+    ""
+  )}locales/{{lng}}/{{ns}}.json %c !!! `,
+  "background-color: #1E88E5; color: #fff; padding: 2px; font-weight: bold;",
+  "background-color: #90CAF9; padding: 2px;",
+  "background-color: #1E88E5; color: #fff; padding: 2px; font-weight: bold;"
+);
+
 i18n
   .use(Backend)
   .use(reactI18nextModule)
   .init({
     fallbackLng: "en",
     debug: true,
+    backend: {
+      loadPath: `locales/{{lng}}/{{ns}}.json`
+    },
     interpolation: {
       escapeValue: false // not needed for react as it escapes by default
     },
