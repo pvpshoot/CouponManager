@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/couponManager/static/js/runtime~main.b51e1f7b.js"
   },
   {
-    "revision": "3297e2314755bf3b018b",
-    "url": "/couponManager/static/js/main.3297e231.chunk.js"
+    "revision": "bfaf3d8df2d80aa42546",
+    "url": "/couponManager/static/js/main.bfaf3d8d.chunk.js"
   },
   {
     "revision": "0e1ac8c2a9487fa37daf",
     "url": "/couponManager/static/js/1.0e1ac8c2.chunk.js"
   },
   {
-    "revision": "3297e2314755bf3b018b",
+    "revision": "bfaf3d8df2d80aa42546",
     "url": "/couponManager/static/css/main.fc04cef2.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/couponManager/static/css/1.4060b60d.chunk.css"
   },
   {
-    "revision": "1da6135bb566a4492a45a4b766085ec9",
+    "revision": "870676e8a2e155ccfa0f491f7845d8f3",
     "url": "/couponManager/index.html"
   }
 ];
