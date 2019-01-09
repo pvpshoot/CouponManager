@@ -3,8 +3,8 @@ const EcwidApp = window.EcwidApp;
 EcwidApp.init({
   // app_id: "coupon-generator", // use your application namespace
   app_id: "multiple-coupons-dev", // for dev
-  autoloadedflag: false,
-  autoheight: true
+  autoloadedflag: true,
+  autoheight: false
 });
 
 EcwidApp.setSize({
