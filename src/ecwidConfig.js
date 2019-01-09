@@ -3,9 +3,14 @@ const EcwidApp = window.EcwidApp;
 EcwidApp.init({
   // app_id: "coupon-generator", // use your application namespace
   app_id: "multiple-coupons-dev", // for dev
-  autoloadedflag: true,
+  autoloadedflag: false,
   autoheight: true
 });
+
+EcwidApp.setSize({
+  height: window.innerHeight
+});
+
 
 const storeData = EcwidApp.getPayload();
 export const storeId = storeData.store_id;
