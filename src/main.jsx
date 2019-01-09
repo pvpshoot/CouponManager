@@ -136,6 +136,10 @@ class Main extends React.Component {
     if (_.isObject(couponsArray)) {
       const { search } = this.state;
 
+      const sortByDate = R.sort((a, b) => {
+        return new Date(b.updateDate) - new Date(a.updateDate);
+      });
+
       const couponsForTable = R.pipe(
         R.groupBy(R.prop("name")),
         R.values,
@@ -153,7 +157,7 @@ class Main extends React.Component {
             discountType: coupons[0].discountType,
             id: coupons[0].id,
             status: coupons[0].status,
-            data: coupons
+            data: sortByDate(coupons)
           };
         })
       );
