@@ -1,8 +1,14 @@
 @import "~antd/dist/antd.css";
 
+body,
+html {
+  height: initial;
+}
+
 .CouponManager {
   padding: 20px;
 }
+
 :global(.input-append > input) {
   display: inline-block;
   width: 100%;
