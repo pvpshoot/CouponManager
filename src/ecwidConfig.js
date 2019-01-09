@@ -8,7 +8,7 @@ EcwidApp.init({
 });
 
 EcwidApp.setSize({
-  height: window.innerHeight
+  height: 900
 });
 
 
