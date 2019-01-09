@@ -4,12 +4,12 @@ EcwidApp.init({
   // app_id: "coupon-generator", // use your application namespace
   app_id: "multiple-coupons-dev", // for dev
   autoloadedflag: true,
-  autoheight: false
+  autoheight: true
 });
 
-EcwidApp.setSize({
-  height: 900
-});
+// EcwidApp.setSize({
+//   height: 900
+// });
 
 
 const storeData = EcwidApp.getPayload();
