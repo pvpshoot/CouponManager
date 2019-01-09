@@ -8,7 +8,7 @@ self.__precacheManifest = [
     "url": "/couponManager/static/js/main.f69e730e.chunk.js"
   },
   {
-    "revision": "558a9ce07f206071740f754166ef5f52",
+    "revision": "caf9efe342d64978bc345ba798cb44a4",
     "url": "/couponManager/index.html"
   }
 ];
