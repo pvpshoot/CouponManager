@@ -50,6 +50,7 @@ class App extends React.Component {
     );
   }
   render() {
+    return <h1>TEST</h1>
     return (
       <Layout style={{ minHeight: "100vh" }}>{this.renderContent()}</Layout>
     );
