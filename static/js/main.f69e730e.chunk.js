@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[0],[function(o,t,a){o.exports=a(1)},function(o,t,a){"use strict";a.r(t);var e=window.EcwidApp;e.init({app_id:"multiple-coupons-dev",autoloadedflag:!0,autoheight:!0});var i=e.getPayload();i.store_id,i.access_token;alert("IT WORKS")}],[[0,1]]]);
-//# sourceMappingURL=main.f69e730e.chunk.js.map
