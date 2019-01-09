@@ -1,15 +1,9 @@
 {
-  "main.css": "/couponManager/static/css/main.92f74f75.chunk.css",
-  "main.js": "/couponManager/static/js/main.07d9e9d8.chunk.js",
-  "main.js.map": "/couponManager/static/js/main.07d9e9d8.chunk.js.map",
-  "static/css/1.4060b60d.chunk.css": "/couponManager/static/css/1.4060b60d.chunk.css",
-  "static/js/1.0e1ac8c2.chunk.js": "/couponManager/static/js/1.0e1ac8c2.chunk.js",
-  "static/js/1.0e1ac8c2.chunk.js.map": "/couponManager/static/js/1.0e1ac8c2.chunk.js.map",
-  "runtime~main.js": "/couponManager/static/js/runtime~main.b51e1f7b.js",
-  "runtime~main.js.map": "/couponManager/static/js/runtime~main.b51e1f7b.js.map",
-  "static/css/main.92f74f75.chunk.css.map": "/couponManager/static/css/main.92f74f75.chunk.css.map",
-  "static/css/1.4060b60d.chunk.css.map": "/couponManager/static/css/1.4060b60d.chunk.css.map",
+  "main.js": "/couponManager/static/js/main.f69e730e.chunk.js",
+  "main.js.map": "/couponManager/static/js/main.f69e730e.chunk.js.map",
+  "runtime~main.js": "/couponManager/static/js/runtime~main.c68e9837.js",
+  "runtime~main.js.map": "/couponManager/static/js/runtime~main.c68e9837.js.map",
   "index.html": "/couponManager/index.html",
-  "precache-manifest.362bc2b82a77d5742ce02e457fbebfd3.js": "/couponManager/precache-manifest.362bc2b82a77d5742ce02e457fbebfd3.js",
+  "precache-manifest.61ba3fccc78ab68e8ecd75c4e91806f2.js": "/couponManager/precache-manifest.61ba3fccc78ab68e8ecd75c4e91806f2.js",
   "service-worker.js": "/couponManager/service-worker.js"
 }
