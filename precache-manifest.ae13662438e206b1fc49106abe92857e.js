@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/couponManager/static/css/1.4060b60d.chunk.css"
   },
   {
-    "revision": "161779f2f98951590ce5fa2f48450892",
+    "revision": "fca82ef4110b8e6fda29fc2ee999d854",
     "url": "/couponManager/index.html"
   }
 ];
