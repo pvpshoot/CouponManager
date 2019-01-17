@@ -47,6 +47,7 @@ export function getCurency() {
 
 export function generateCoupons(amount, pattern) {
   return function(dispatch) {
+    debugger; //eslint-disable-line
     axios
       .post(
         `https://app.ecwid.com/api/v3/${storeId}/discount_coupons?token=${accessToken}`,
@@ -68,6 +69,7 @@ export function openCopyModal() {
   };
 }
 export function setActiveCoupon(obj) {
+  debugger; //eslint-disable-line
   return {
     type: types.SET_ACTIVE_COUPON,
     payload: obj

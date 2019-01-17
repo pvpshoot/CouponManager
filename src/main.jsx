@@ -153,10 +153,7 @@ class Main extends React.Component {
         }),
         R.map(coupons => {
           return {
-            name: coupons[0].name,
-            discountType: coupons[0].discountType,
-            id: coupons[0].id,
-            status: coupons[0].status,
+            ...coupons[0],
             data: sortByDate(coupons)
           };
         })
@@ -166,6 +163,7 @@ class Main extends React.Component {
         selectedRowKeys: this.props.selectedCoupon.name,
         type: "radio",
         onChange: (selectedRowKeys, selectedRows) => {
+          debugger; //eslint-disable-line
           this.props.setActiveCoupon(R.head(selectedRows));
         }
       };
@@ -181,26 +179,19 @@ class Main extends React.Component {
           columns={this.columns}
           dataSource={couponsForTable(couponsArray)}
           size="small"
-          expandedRowRender={
-            record => (
-              <ul style={{ columnCount: 4 }}>
-                {record.data.map(el => (
-                  <li key={el.code}>{el.code}</li>
-                ))}
-              </ul>
-            )
-            // record.data.map(
-            // el =>
-            // el.code
-            // <Tag color="blue" key={el.code}>
-            //   {el.code}
-            // </Tag>
-          }
+          expandedRowRender={record => (
+            <ul style={{ columnCount: 4 }}>
+              {record.data.map(el => (
+                <li key={el.code}>{el.code}</li>
+              ))}
+            </ul>
+          )}
           pagination={{
             defaultPageSize: 30
           }}
           onRow={record => ({
             onClick: () => {
+              debugger; //eslint-disable-line
               this.props.setActiveCoupon(record);
             }
           })}

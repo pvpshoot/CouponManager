@@ -28,7 +28,6 @@ const couponReducer = function(state = initialState, action) {
         },
         [...state.coupons, ...action.payload.items]
       );
-      // debugger; //eslint-disable-line
       return {
         ...state,
         coupons: uniqCoupons,
